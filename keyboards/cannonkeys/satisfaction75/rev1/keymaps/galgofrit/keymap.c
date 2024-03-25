@@ -13,24 +13,26 @@ extern MidiDevice midi_device;
 #define MIDI_CHANNEL 0x1F
 #define MIDI_HOP_SIZE 3
 
-/* enum custom_keycodes { */
-    /* MIDI_CC80 = SAFE_RANGE, */
-/* }; */
-
 int MIDI_POSITION = 0;
 
-/* bool process_record_user(uint16_t keycode, keyrecord_t *record) { */
-    /* switch (keycode) { */
-        /* case MIDI_CC80: */
-            /* if (record->event.pressed) { */
-                /* midi_send_cc(&midi_device, midi_config.channel, 80, MIDI_CC_ON); */
-            /* } else { */
+enum custom_keycodes {
+    ENCODER_DFLT_STR = SAFE_RANGE,
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case ENCODER_DFLT_STR:
+            if (record->event.pressed) {
+                eeprom_update_byte((uint8_t*)EEPROM_DEFAULT_ENCODER, encoder_mode);
+                eeconfig_enable();
+            }
+            /* else { */
                 /* midi_send_cc(&midi_device, midi_config.channel, 80, MIDI_CC_OFF); */
             /* } */
-            /* return true; */
-    /* } */
-    /* return true; */
-/* }; */
+            return true;
+    }
+    return true;
+};
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (encoder_mode != ENC_MODE_CUSTOM0)
@@ -67,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LCTL,  KC_LALT,  KC_LGUI,                      KC_SPC,                                 KC_RALT,  MO(1),  KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT
   ),
   [1] = LAYOUT_default(
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, ENCODER_DFLT_STR,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, OLED_TOGG,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, CLOCK_SET,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,

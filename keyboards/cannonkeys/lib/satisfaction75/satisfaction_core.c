@@ -300,6 +300,7 @@ void custom_config_load(void){
 #ifdef DYNAMIC_KEYMAP_ENABLE
   oled_mode = eeprom_read_byte((uint8_t*)EEPROM_DEFAULT_OLED);
   enabled_encoder_modes = eeprom_read_byte((uint8_t*)EEPROM_ENABLED_ENCODER_MODES);
+  encoder_mode = eeprom_read_byte((uint8_t*)EEPROM_DEFAULT_ENCODER);
 #endif
 }
 
