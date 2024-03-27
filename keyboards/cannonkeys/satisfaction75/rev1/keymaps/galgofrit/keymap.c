@@ -38,7 +38,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     if (encoder_mode != ENC_MODE_CUSTOM0)
         return true;
 
-    if (index == 0) { // Assuming your encoder is at index 0
+    if (index == 0) {
         if (clockwise) {
             if (MIDI_POSITION >= 127 - MIDI_HOP_SIZE) {
                 MIDI_POSITION = 127;
