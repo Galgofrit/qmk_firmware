@@ -34,7 +34,7 @@ bool oled_wakeup_requested = false;
 uint32_t oled_sleep_timer;
 
 uint8_t encoder_value = 32;
-uint8_t encoder_mode = ENC_MODE_VOLUME;
+uint8_t encoder_mode = ENC_MODE_CUSTOM0;
 uint8_t enabled_encoder_modes = 0x1F;
 
 RTCDateTime last_timespec;
@@ -303,6 +303,7 @@ void custom_config_load(void){
 #ifdef DYNAMIC_KEYMAP_ENABLE
   oled_mode = eeprom_read_byte((uint8_t*)EEPROM_DEFAULT_OLED);
   enabled_encoder_modes = eeprom_read_byte((uint8_t*)EEPROM_ENABLED_ENCODER_MODES);
+  encoder_mode = eeprom_read_byte((uint8_t*)EEPROM_DEFAULT_ENCODER);
 #endif
 }
 

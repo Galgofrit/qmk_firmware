@@ -38,7 +38,10 @@
 // 1 for enabled encoder modes (1 byte)
 // 1 for OLED default mode (1 byte)
 // 6 for 3x custom encoder settings, left, right, and press (18 bytes)
-#define VIA_EEPROM_CUSTOM_CONFIG_SIZE 20
+// GALGO GALGO +1 for default encoder mode (1 byte)
+#define VIA_EEPROM_CUSTOM_CONFIG_SIZE 21
+
+#define MIDI_ADVANCED
 
 // VIA lighting is handled by the keyboard-level code
 #define VIA_CUSTOM_LIGHTING_ENABLE
